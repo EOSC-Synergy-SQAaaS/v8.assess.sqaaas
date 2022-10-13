@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.com/fall3d-distribution/v8:
+      branch: main
+      repo: https://gitlab.com/fall3d-distribution/v8
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.com/fall3d-distribution/v8 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-cream-rabbit.sh
+        container: qc.acc_craggy-sepia-mongrel
+  QC.Doc:
+    repos:
+      gitlab.com/fall3d-distribution/v8 find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skanky-chartreuse-bear.sh
+        container: qc.doc_snappy-bronze-jackal
+      gitlab.com/fall3d-distribution/v8 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-magnolia-zonkey.sh
+        container: qc.doc_cranky-khaki-frog
+      gitlab.com/fall3d-distribution/v8 markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-linen-balinese.sh
+        container: qc.doc_geeky-periwinkle-vulture
+  QC.Lic:
+    repos:
+      gitlab.com/fall3d-distribution/v8 licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-maroon-alligator.sh
+        container: qc.lic_slaphappy-malachite-caracal
+  QC.Ver:
+    repos:
+      gitlab.com/fall3d-distribution/v8 get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-cyan-dane.sh
+        container: qc.ver_clammy-flax-woodlouse
+timeout: 1800
